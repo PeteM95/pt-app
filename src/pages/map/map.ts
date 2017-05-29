@@ -58,6 +58,10 @@ export class MapPage implements AfterViewInit, OnDestroy {
 			});
 	}
 
+	checkIn(): void {
+		console.log('Checking in...');
+	}
+
 	loadMap(): void {
 		// create a new map by passing HTMLElement
 		let element: HTMLElement = document.getElementById('map');
