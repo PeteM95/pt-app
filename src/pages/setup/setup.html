@@ -1,0 +1,24 @@
+<ion-header no-shadow>
+	<ion-navbar>
+		<ion-buttons end *ngIf="showSkip">
+			<button ion-button (click)="skip()" color="primary">{{ 'SKIP_BUTTON' }}</button>
+		</ion-buttons>
+	</ion-navbar>
+</ion-header>
+
+<ion-content no-bounce>
+	<ion-slides pager="true">
+		<ion-slide *ngFor="let slide of slides">
+			<h2 class="slide-title" [innerHTML]="slide.title"></h2>
+			<ng-container *ngComponentOutlet="currentSlide.body"></ng-container>
+		</ion-slide>
+		<ion-slide>
+			<img src="assets/img/ica-slidebox-img-4.png" class="slide-image" />
+			<h2 class="slide-title">{{ 'SLIDE4_TITLE' }}</h2>
+			<button ion-button icon-right large clear (click)="startApp()">
+				{{ 'CONTINUE_BUTTON' }}
+				<ion-icon name="arrow-forward"></ion-icon>
+			</button>
+		</ion-slide>
+	</ion-slides>
+</ion-content>

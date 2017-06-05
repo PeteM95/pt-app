@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, ToastController } from 'ionic-angular';
 
-import { MainPage } from '../../pages/pages';
+import { SetupPage } from '../setup/setup';
 import { User } from '../../providers/user';
 
 @Component({
@@ -31,10 +31,10 @@ export class SignupPage {
 			.subscribe(
 				(resp) => {
 					console.log(resp);
-					this.navCtrl.push(MainPage);
+					this.navCtrl.push(SetupPage);
 				},
 				(err) => {
-					this.navCtrl.push(MainPage); // TODO: Remove this when you add your signup endpoint
+					this.navCtrl.push(SetupPage); // TODO: Remove this when you add your signup endpoint
 
 					// Unable to sign up
 					const toast = this.toastCtrl.create({

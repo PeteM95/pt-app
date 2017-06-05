@@ -21,10 +21,10 @@ export class MapPage implements AfterViewInit, OnDestroy {
 
 	@ViewChild('map') map;
 
-	constructor(private googleMaps: GoogleMaps,
+	constructor(private _googleMaps: GoogleMaps,
 				public navCtrl: NavController,
 				public platform: Platform,
-				private geolocation: Geolocation) {
+				private _geolocation: Geolocation) {
 		this.icon = { url: 'file:///android_asset/www/assets/marker.png'};
 		this.markerOptions = {
 			title: 'Current Position',
@@ -66,7 +66,7 @@ export class MapPage implements AfterViewInit, OnDestroy {
 		// create a new map by passing HTMLElement
 		let element: HTMLElement = document.getElementById('map');
 
-		this.googleMap = this.googleMaps.create(element);
+		this.googleMap = this._googleMaps.create(element);
 
 		// listen to MAP_READY event
 		// must wait for this event to fire before modifying the map
@@ -75,7 +75,7 @@ export class MapPage implements AfterViewInit, OnDestroy {
 	}
 
 	watchPosition(): void {
-		this.coords = this.geolocation.watchPosition({ enableHighAccuracy: true })
+		this.coords = this._geolocation.watchPosition({ enableHighAccuracy: true })
 			.sample(Observable.interval(2500))
 			.subscribe(
 				(res: Geoposition) => {
