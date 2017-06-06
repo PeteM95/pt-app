@@ -1,4 +1,4 @@
-<div #map id="map"></div>
+<div [ngStyle]="{display: displayMap}" #map id="map"></div>
 <ion-list>
 	<ion-item>
 		<ion-input (click)="showAddressModal()" [(ngModel)]="address.description" type="text" disabled="true" placeholder="Enter address"></ion-input>

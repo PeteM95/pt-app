@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 
 import { AutocompletePage } from './autocomplete';
 
-import { CameraPosition, Geocoder, GoogleMap, GoogleMaps, GoogleMapsEvent, LatLng, Marker, MarkerIcon, MarkerOptions } from '@ionic-native/google-maps';
+import { CameraPosition, Geocoder, GeocoderResult, GoogleMap, GoogleMaps, GoogleMapsEvent, LatLng, Marker, MarkerIcon, MarkerOptions } from '@ionic-native/google-maps';
 
 @Component({
 	selector: 'setup-gym',
@@ -19,6 +19,7 @@ export class GymSetup implements AfterViewInit {
 	marker: Marker;
 	markerOptions: MarkerOptions;
 	places: google.maps.places.PlacesService;
+	displayMap: string;
 
 	@ViewChild('map') map;
 
@@ -39,23 +40,46 @@ export class GymSetup implements AfterViewInit {
 			terms: [],
 			types: []
 		};
+		this.displayMap = 'block';
 	}
 
 	ngAfterViewInit() {
-		this.platform.ready().then(() => {
-			this.loadMap();
-		});
+		Observable.fromPromise(this.platform.ready())
+			.subscribe(
+				(res: string) => { this.loadMap(); },
+				(err: any) => { console.log(err); },
+				() => {}
+			);
 	}
 
 	loadMap(): void {
 		let element: HTMLElement = document.getElementById('map');
 		this.googleMap = this._googleMaps.create(element);
-		this.googleMap.one(GoogleMapsEvent.MAP_READY).then(() => console.log('Map is ready'));
+		this.googleMap.setOptions({
+			'gestures': {
+				'scroll': false,
+				'tilt': false,
+				'rotate': false,
+				'zoom': false
+			}
+		});
+
+		Observable.fromPromise(this.googleMap.one(GoogleMapsEvent.MAP_READY))
+			.subscribe(
+				(res: any) => { console.log('Map is ready'); },
+				(err: any) => { console.log(err); },
+				() => {}
+			);
 
 		// Load PlacesService
-		this._mapsAPILoader.load().then(() => {
-			this.places = new google.maps.places.PlacesService(document.createElement('div'));
-		});
+		Observable.fromPromise(this._mapsAPILoader.load())
+			.subscribe(
+				() => {
+					this.places = new google.maps.places.PlacesService(document.createElement('div'));
+				},
+				(err: any) => { console.log(err); },
+				() => {}
+			);
 	}
 
 	loadMarker(): void {
@@ -64,38 +88,35 @@ export class GymSetup implements AfterViewInit {
 			if (status === google.maps.places.PlacesServiceStatus.OK) {
 				this.gym.name = placeResult.name;
 				Observable.fromPromise(this._geocoder.geocode({ address: placeResult.formatted_address }))
+					.do((result: GeocoderResult) => {
+						if (result[0]) {
+							//console.log(result);
+							this.gym.position = new LatLng(result[0].position.lat, result[0].position.lng);
+							this.markerOptions = {
+								title: this.gym.name,
+								position: this.gym.position
+							};
+						}
+					})
+					.concatMap(result => Observable.fromPromise(this.googleMap.addMarker(this.markerOptions)),
+							  (result, marker) => marker)
 					.subscribe(
-						(result: any) => {
-							this.gym.position = result.position;
+						(marker: Marker) => {
+							if (this.marker) {
+								this.marker.remove();
+							}
+							marker.showInfoWindow();
+							this.marker = marker;
 						},
 						(err: any) => {
 							console.log(err);
 						},
-						() => {}
+						() => {
+							this.googleMap.moveCamera(this.moveCamera(this.markerOptions.position));							
+						}
 					);
 			}
 		});
-
-		this.markerOptions = {
-			title: this.gym.name,
-			position: this.gym.position
-		};
-
-		Observable.fromPromise(this.googleMap.addMarker(this.markerOptions))
-			.subscribe(
-				(marker: Marker) => {
-					marker.showInfoWindow();
-					this.marker = marker;
-				},
-				(err: any) => {
-					console.log(err);
-				},
-				() => {
-					this.moveCamera(this.markerOptions.position);
-				}
-			);
-			
-		return;
 	}
 
 	moveCamera(position: LatLng): CameraPosition {
@@ -109,12 +130,16 @@ export class GymSetup implements AfterViewInit {
 
 	showAddressModal(): void {
 		let modal = this.modalCtrl.create(AutocompletePage);
+		this.displayMap = 'none';
 		modal.onDidDismiss(data => {
-			this.address = data;
-			this.loadMarker();
-			if (this.address) {
-				console.log('all done');
-			}
+			this.displayMap = 'block';
+			if (data) {
+				this.address = data;
+				this.loadMarker();
+				if (this.address) {
+					console.log('all done');
+				}
+			};
 		});
 		modal.present();
 	}

@@ -1,5 +1,5 @@
-import { Component, NgZone, OnInit } from '@angular/core';
-import { NavController, ViewController } from 'ionic-angular';
+import { Component, NgZone, OnInit, ViewChild } from '@angular/core';
+import { NavController, ViewController, Searchbar } from 'ionic-angular';
 import { MapsAPILoader } from 'angular2-google-maps/core';
 
 
@@ -12,6 +12,8 @@ export class AutocompletePage implements OnInit {
 	autocomplete = { query: '' };
 	places: any;
 	service: any;
+
+	@ViewChild('searchbar') searchbar: Searchbar;
 
 	constructor(public navCtrl: NavController,
 				public viewCtrl: ViewController,
@@ -26,7 +28,10 @@ export class AutocompletePage implements OnInit {
 	}
 
 	ionViewDidLoad() {
-		
+		// Autofocus on searchbar
+		setTimeout(() => {
+			this.searchbar.setFocus();
+		}, 200);
 	}
 
 	dismiss(): void {
