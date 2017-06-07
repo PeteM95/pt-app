@@ -1,9 +1,11 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, ViewChild } from '@angular/core';
 import { ModalController, NavController, Platform } from 'ionic-angular';
 import { MapsAPILoader } from 'angular2-google-maps/core';
 import { Observable } from 'rxjs';
 
 import { AutocompletePage } from './autocomplete';
+import { SetupComplete } from '../pages';
+import { MainPage } from '../../pages';
 
 import { CameraPosition, Geocoder, GeocoderResult, GoogleMap, GoogleMaps, GoogleMapsEvent, LatLng, Marker, MarkerIcon, MarkerOptions } from '@ionic-native/google-maps';
 
@@ -11,7 +13,7 @@ import { CameraPosition, Geocoder, GeocoderResult, GoogleMap, GoogleMaps, Google
 	selector: 'setup-gym',
 	templateUrl: 'gym.html'
 })
-export class GymSetup implements AfterViewInit {
+export class GymSetup implements AfterViewInit, OnDestroy {
 	address: google.maps.places.AutocompletePrediction;
 	googleMap: GoogleMap;
 	gym: { name: string, position: LatLng };
@@ -19,11 +21,10 @@ export class GymSetup implements AfterViewInit {
 	marker: Marker;
 	markerOptions: MarkerOptions;
 	places: google.maps.places.PlacesService;
-	displayMap: string;
 
 	@ViewChild('map') map;
 
-	constructor(private _navCtrl: NavController,
+	constructor(public navCtrl: NavController,
 				public modalCtrl: ModalController,
 				public platform: Platform,
 				private _googleMaps: GoogleMaps,
@@ -40,7 +41,6 @@ export class GymSetup implements AfterViewInit {
 			terms: [],
 			types: []
 		};
-		this.displayMap = 'block';
 	}
 
 	ngAfterViewInit() {
@@ -50,6 +50,10 @@ export class GymSetup implements AfterViewInit {
 				(err: any) => { console.log(err); },
 				() => {}
 			);
+	}
+
+	ngOnDestroy() {
+		//this.googleMap.remove();
 	}
 
 	loadMap(): void {
@@ -128,11 +132,22 @@ export class GymSetup implements AfterViewInit {
 		return camera;
 	}
 
+	pushPage(): void {
+		// TODO: Process data
+		this.googleMap.remove();
+		Observable.fromPromise(this.navCtrl.setRoot(MainPage))
+			.subscribe(
+				() => console.log('Setting root to MainPage'),
+				(err: any) => console.log(err),
+				() => {}
+			);
+	}
+
 	showAddressModal(): void {
 		let modal = this.modalCtrl.create(AutocompletePage);
-		this.displayMap = 'none';
+		this.googleMap.setClickable(false);
 		modal.onDidDismiss(data => {
-			this.displayMap = 'block';
+			this.googleMap.setClickable(true);
 			if (data) {
 				this.address = data;
 				this.loadMarker();

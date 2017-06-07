@@ -51,11 +51,15 @@ export class MapPage implements AfterViewInit, OnDestroy {
 
 		this.markerOptions.position = position;
 
-		this.googleMap.addMarker(this.markerOptions)
-			.then((marker: Marker) => {
-				marker.showInfoWindow();
-				this.marker = marker;
-			});
+		Observable.fromPromise(this.googleMap.addMarker(this.markerOptions))
+			.subscribe(
+				(marker: Marker) => {
+					marker.showInfoWindow();
+					this.marker = marker;
+				},
+				(err: any) => console.log(err),
+				() => {}
+			);
 	}
 
 	checkIn(): void {
@@ -70,7 +74,12 @@ export class MapPage implements AfterViewInit, OnDestroy {
 
 		// listen to MAP_READY event
 		// must wait for this event to fire before modifying the map
-		this.googleMap.one(GoogleMapsEvent.MAP_READY).then(() => console.log('Map is ready!'));
+		Observable.fromPromise(this.googleMap.one(GoogleMapsEvent.MAP_READY))
+			.subscribe(
+				() => console.log('Map page Map is ready'),
+				(err: any) => console.log(err),
+				() => {}
+			);
 		this.firstCamera = true;
 	}
 
