@@ -1,11 +1,11 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { ModalController, NavController, Platform } from 'ionic-angular';
 import { MapsAPILoader } from '@agm/core';
 import { Observable } from 'rxjs';
 
 import { AutocompletePage } from './autocomplete';
 import { SetupComplete } from '../pages';
-import { MainPage } from '../../pages';
+import { Setup2 } from '../pages';
 
 import { CameraPosition, Geocoder, GeocoderResult, GoogleMap, GoogleMaps, GoogleMapsEvent, LatLng, Marker, MarkerIcon, MarkerOptions } from '@ionic-native/google-maps';
 
@@ -16,7 +16,7 @@ declare var cordova: any;
 	selector: 'setup-gym',
 	templateUrl: 'gym.html'
 })
-export class GymSetup implements AfterViewInit, OnDestroy {
+export class GymSetup implements AfterViewInit {
 	address: google.maps.places.AutocompletePrediction;
 	googleMap: GoogleMap;
 	gym: { name: string, position: LatLng };
@@ -54,10 +54,6 @@ export class GymSetup implements AfterViewInit, OnDestroy {
 				(err: any) => { console.log(err); },
 				() => {}
 			);
-	}
-
-	ngOnDestroy() {
-		//this.googleMap.remove();
 	}
 
 	loadMap(): void {
@@ -176,10 +172,10 @@ export class GymSetup implements AfterViewInit, OnDestroy {
 
 	pushPage(): void {
 		// TODO: Process data
-		//this.googleMap.remove();
-		Observable.fromPromise(this.navCtrl.setRoot(MainPage))
+		this.map.remove();
+		Observable.fromPromise(this.navCtrl.push(Setup2))
 			.subscribe(
-				() => console.log('Setting root to MainPage'),
+				() => console.log('pushing to next'),
 				(err: any) => console.log(err),
 				() => {}
 			);
