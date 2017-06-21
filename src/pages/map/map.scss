@@ -4,6 +4,11 @@ page-map {
 		height: 75%;
 	}
 
+	ion-app._gmaps_cdv_ .nav-decor {
+		background-color: transparent !important;
+		display: none !important;
+	}
+
 	#check-in-button {
 		height: 25%;
 		width: 100%;
