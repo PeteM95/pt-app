@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, Platform } from 'ionic-angular';
 import { Observable } from 'rxjs';
 
-import { Setup3 } from '../pages';
+import { Setup4 } from '../pages';
 
 @Component({
 	selector: 'setup-organization',
@@ -18,7 +18,7 @@ export class OrganizationSetup {
 	pushPage(): void {
 		// TODO: Process data
 		console.log(`Amount selected: ${this.amount}`);
-		Observable.fromPromise(this.navCtrl.push(Setup3, {
+		Observable.fromPromise(this.navCtrl.push(Setup4, {
 					ein: this.organization.ein,
 					amount: this.amount
 				}))
