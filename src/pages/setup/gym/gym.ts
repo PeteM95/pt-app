@@ -4,7 +4,6 @@ import { MapsAPILoader } from '@agm/core';
 import { Observable } from 'rxjs';
 
 import { AutocompletePage } from './autocomplete';
-import { SetupComplete } from '../pages';
 import { Setup2 } from '../pages';
 
 import { CameraPosition, Geocoder, GeocoderResult, GoogleMap, GoogleMaps, GoogleMapsEvent, LatLng, Marker, MarkerIcon, MarkerOptions } from '@ionic-native/google-maps';
@@ -175,7 +174,7 @@ export class GymSetup implements AfterViewInit {
 		this.map.remove();
 		Observable.fromPromise(this.navCtrl.push(Setup2))
 			.subscribe(
-				() => console.log('pushing to next'),
+				() => console.log('Pushing to next'),
 				(err: any) => console.log(err),
 				() => {}
 			);

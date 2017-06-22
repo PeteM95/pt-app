@@ -16,6 +16,7 @@ import { SetupPage } from '../pages/setup/setup';
 import { GymSetup } from '../pages/setup/gym/gym';
 import { AutocompletePage } from '../pages/setup/gym/autocomplete';
 import { DaysSetup } from '../pages/setup/days/days';
+import { OrganizationSetup } from '../pages/setup/organization/organization';
 
 import { User } from '../providers/user';
 
@@ -37,7 +38,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     SetupPage,
     GymSetup,
     AutocompletePage,
-    DaysSetup
+    DaysSetup,
+    OrganizationSetup
   ],
   imports: [
     AgmCoreModule.forRoot({
@@ -60,7 +62,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     SetupPage,
     GymSetup,
     AutocompletePage,
-    DaysSetup
+    DaysSetup,
+    OrganizationSetup
   ],
   providers: [
     Geocoder,

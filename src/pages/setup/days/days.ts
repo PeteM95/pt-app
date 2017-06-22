@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, Platform } from 'ionic-angular';
 import { Observable } from 'rxjs';
 
-import { MainPage } from '../../pages';
+import { Setup3 } from '../pages';
 
 export interface Day {
 	name: string,
@@ -30,9 +30,9 @@ export class DaysSetup {
 	pushPage(): void {
 		// TODO: Process data
 		console.log(`Days selected: ${this.days}`);
-		Observable.fromPromise(this.navCtrl.setRoot(MainPage))
+		Observable.fromPromise(this.navCtrl.push(Setup3))
 			.subscribe(
-				() => console.log('Setting root to MainPage'),
+				() => console.log('Pushing to next'),
 				(err: any) => console.log(err),
 				() => {}
 			);
