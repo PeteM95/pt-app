@@ -1,0 +1,26 @@
+<ion-header>
+	<ion-navbar>
+		<ion-title>{{ 'LOGIN_TITLE' }}</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content>
+	<form (submit)="doLogin()">
+		<ion-list>
+
+			<ion-item>
+				<ion-label floating>{{ 'USERNAME' }}</ion-label>
+				<ion-input type="text" [(ngModel)]="account.username" name="username"></ion-input>
+			</ion-item>
+
+			<ion-item>
+				<ion-label floating>{{ 'PASSWORD' }}</ion-label>
+				<ion-input type="password" [(ngModel)]="account.password" name="password"></ion-input>
+			</ion-item>
+
+			<div padding>
+				<button ion-button color="primary" block>{{ 'LOGIN_BUTTON' }}</button>
+			</div>
+		</ion-list>
+	</form>
+</ion-content>
