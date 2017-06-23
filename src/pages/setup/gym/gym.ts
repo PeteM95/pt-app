@@ -66,25 +66,6 @@ export class GymSetup implements AfterViewInit {
 			console.log('Map is ready.');
 		});
 
-
-		// let element: HTMLElement = document.getElementById('map');
-		// this.googleMap = this._googleMaps.create(element);
-		// this.googleMap.setOptions({
-		// 	'gestures': {
-		// 		'scroll': false,
-		// 		'tilt': false,
-		// 		'rotate': false,
-		// 		'zoom': false
-		// 	}
-		// });
-
-		// Observable.fromPromise(this.googleMap.one(GoogleMapsEvent.MAP_READY))
-		// 	.subscribe(
-		// 		(res: any) => { console.log('Map is ready'); },
-		// 		(err: any) => { console.log(err); },
-		// 		() => {}
-		// 	);
-
 		// Load PlacesService
 		Observable.fromPromise(this._mapsAPILoader.load())
 			.subscribe(
@@ -118,44 +99,6 @@ export class GymSetup implements AfterViewInit {
 				});
 
 				this.map.moveCamera(this.moveCamera(this.markerOptions.position));
-
-				// Observable.fromPromise(this._geocoder.geocode({ address: placeResult.address_components[0].long_name }))
-				// 	.do((result: GeocoderResult) => {
-				// 		if (result[0]) {
-				// 			console.log(result);
-				// 			this.gym.position = new LatLng(placeResult.geometry.location.lat(), placeResult.geometry.location.lng());
-				// 			//this.gym.position = new LatLng(result[0].position.lat, result[0].position.lng);
-				// 			this.markerOptions = {
-				// 				title: this.gym.name,
-				// 				position: this.gym.position,
-				// 				animation: 'drop'
-				// 			};
-				// 		} else {
-				// 			console.log('Could not Geocode place');
-				// 		}
-				// 	})
-				// 	.do(() => {
-				// 		this.map.addMarker(this.markerOptions, (marker: Marker) => {
-				// 			if (this.marker) {
-				// 				this.marker.remove();
-				// 			}
-				// 			marker.showInfoWindow();
-				// 			this.marker = marker;
-				// 		});
-				// 	})
-				// 	// .concatMap(result => this.map.addMarker(this.markerOptions),
-				// 	// 		  (result, marker) => marker)
-				// 	.subscribe(
-				// 		() => {
-				// 			//console.log('should be done with marker');
-				// 		},
-				// 		(err: any) => {
-				// 			console.log(err);
-				// 		},
-				// 		() => {
-				// 			this.map.moveCamera(this.moveCamera(this.markerOptions.position));							
-				// 		}
-				// 	);
 			}
 		});
 	}
@@ -182,9 +125,7 @@ export class GymSetup implements AfterViewInit {
 
 	showAddressModal(): void {
 		let modal = this.modalCtrl.create(AutocompletePage);
-		//this.googleMap.setClickable(false);
 		modal.onDidDismiss(data => {
-			//this.googleMap.setClickable(true);
 			if (data) {
 				this.address = data;
 				this.loadMarker();
