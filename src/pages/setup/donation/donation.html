@@ -1,0 +1,49 @@
+<ion-header no-shadow>
+	<ion-navbar>
+		<ion-title>Choose Days</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content>
+	<form id="panda_cc_form">
+		<ion-list>
+			<ion-item>
+				<ion-label color="primary" floating>First Name</ion-label>
+				<ion-input type="text" #fn ></ion-input>
+			</ion-item>
+
+			<ion-item>
+				<ion-label color="primary" floating>Last Name</ion-label>
+				<ion-input type="text" #ln ></ion-input>
+			</ion-item>
+
+			<ion-item>
+				<ion-label color="primary" floating>Credit Card Number</ion-label>
+				<ion-input type="text" #cc ></ion-input>
+			</ion-item>
+
+			<ion-item>
+				<ion-label color="primary" floating>Expiration</ion-label>
+				<ion-input type="text" #ex ></ion-input>
+			</ion-item>
+
+			<ion-item>
+				<ion-label color="primary" floating>CVV</ion-label>
+				<ion-input type="password" #cv ></ion-input>
+			</ion-item>
+
+			<ion-item>
+				<button ion-button color="primary" type="Submit">Submit</button>
+			</ion-item>
+		</ion-list>
+	</form>
+</ion-content>
+
+<ion-footer>
+	<ion-toolbar>
+		<button ion-button icon-right (click)="pushPage()">
+			Next
+			<ion-icon name="arrow-forward"></ion-icon>
+		</button>
+	</ion-toolbar>
+</ion-footer>

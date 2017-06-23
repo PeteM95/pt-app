@@ -1,0 +1,30 @@
+<ion-header no-shadow>
+	<ion-navbar>
+		<ion-title>Choose Days</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content>
+	<ion-list>
+		<ion-item>
+			<ion-label>Doctors Without Borders</ion-label>
+			<ion-checkbox [(ngModel)]="organization.selected"></ion-checkbox>
+		</ion-item>
+
+		<ion-item>
+			<ion-range min="1" max="5" pin [(ngModel)]="amount">
+				<ion-label range-left>$1</ion-label>
+				<ion-label range-right>$5</ion-label>
+			</ion-range>
+		</ion-item>
+	</ion-list>
+</ion-content>
+
+<ion-footer>
+	<ion-toolbar>
+		<button ion-button icon-right (click)="pushPage()">
+			Next
+			<ion-icon name="arrow-forward"></ion-icon>
+		</button>
+	</ion-toolbar>
+</ion-footer>
