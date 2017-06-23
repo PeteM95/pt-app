@@ -1,5 +1,8 @@
 import { Component, AfterViewInit, Renderer2, ViewChild } from '@angular/core';
 import { NavController, NavParams, Platform } from 'ionic-angular';
+import { Observable } from 'rxjs';
+
+import { MainPage } from '../../pages';
 
 declare var Panda: any;
 
@@ -40,5 +43,16 @@ export class DonationSetup implements AfterViewInit {
 		Panda.on('error', (errors) => {
 			console.log(errors);
 		});
+	}
+
+	pushPage(): void {
+		// TODO: Process data
+		console.log(`Amount selected: ${this.amount}`);
+		Observable.fromPromise(this.navCtrl.setRoot(MainPage))
+			.subscribe(
+				() => console.log('Pushing to next'),
+				(err: any) => console.log(err),
+				() => {}
+			);
 	}
 }
