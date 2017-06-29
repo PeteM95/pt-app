@@ -12,7 +12,6 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { WelcomePage } from '../pages/welcome/welcome';
 import { LoginPage } from '../pages/login/login';
 import { SignupPage } from '../pages/signup/signup';
-import { SetupPage } from '../pages/setup/setup';
 import { GymSetup } from '../pages/setup/gym/gym';
 import { AutocompletePage } from '../pages/setup/gym/autocomplete';
 import { DaysSetup } from '../pages/setup/days/days';
@@ -36,7 +35,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     WelcomePage,
     LoginPage,
     SignupPage,
-    SetupPage,
     GymSetup,
     AutocompletePage,
     DaysSetup,
@@ -61,7 +59,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     WelcomePage,
     LoginPage,
     SignupPage,
-    SetupPage,
     GymSetup,
     AutocompletePage,
     DaysSetup,
