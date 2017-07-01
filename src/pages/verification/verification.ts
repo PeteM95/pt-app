@@ -1,18 +1,5 @@
-import { Component, NgModule, OnInit } from '@angular/core';
-import { IonicPageModule, IonicPage, NavController } from 'ionic-angular';
-
-@NgModule({
-	declarations: [
-		VerifyEmailPage
-	],
-	imports: [
-		IonicPageModule.forChild(VerifyEmailPage)
-	],
-	entryComponents: [
-		VerifyEmailPage
-	]
-})
-export class VerificationModule {  }
+import { Component, OnInit } from '@angular/core';
+import { IonicPage, NavController } from 'ionic-angular';
 
 @IonicPage({
 	name: 'verify-email',

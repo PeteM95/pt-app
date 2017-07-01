@@ -3,7 +3,7 @@ import { NavController, ToastController } from 'ionic-angular';
 
 import { MainPage } from '../../pages/pages';
 
-import { User } from '../../providers/user';
+import { User } from '../../services/user';
 
 @Component({
 	selector: 'page-login',
@@ -27,22 +27,6 @@ export class LoginPage {
 
 	// Attempt to login through our User service
 	doLogin() {
-		this._user.login(this.account)
-			.subscribe(
-				(resp: string) => {
-					console.log(resp);
-					this.navCtrl.push(MainPage);
-				},
-				(err) => {
-					this.navCtrl.push(MainPage); // TODO: Make this go somewhere else (handle error)
-					// Unable to log in
-					let toast = this.toastCtrl.create({
-						message: err,
-						duration: 3000,
-						position: 'top'
-					});
-					toast.present();
-				}
-			);
+		console.log('log in');
 	}
 }

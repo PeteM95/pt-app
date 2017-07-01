@@ -22,7 +22,8 @@
     "stripInternal": true,
     "noImplicitAny": false,
     "types": [
-      "@types/underscore"
+      "@types/underscore",
+      "@types/googlemaps"
     ]
   },
   "include": [

@@ -18,7 +18,7 @@ import { DaysSetup } from '../pages/setup/days/days';
 import { OrganizationSetup } from '../pages/setup/organization/organization';
 import { DonationSetup } from '../pages/setup/donation/donation';
 
-import { User } from '../providers/user';
+import { User } from '../services/user';
 
 import { Geolocation } from '@ionic-native/geolocation';
 import { Geocoder, GoogleMaps } from '@ionic-native/google-maps';

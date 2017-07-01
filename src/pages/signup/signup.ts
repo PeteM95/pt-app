@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
 import { NavController, ToastController } from 'ionic-angular';
+import { Observable } from 'rxjs';
+import { MeteorObservable } from 'meteor-rxjs';
 
 import { Setup1 } from '../setup/pages';
-import { User } from '../../providers/user';
+import { User } from '../../services/user';
+import { Profile } from 'api/models';
 
 @Component({
 	selector: 'page-signup',
@@ -12,9 +15,9 @@ export class SignupPage {
 	// The account fields for the login form.
 	// If you're using th eusername field with or without email, make
 	// sure to add it to the type
-	account: { username: string, email: string, password: string } = {
+	account: Profile = {
 		username: 'Test Human',
-		email: 'test@example.com',
+		email: 'pete.milionis@gmail.com',
 		password: 'test'
 	};
 
@@ -27,23 +30,12 @@ export class SignupPage {
 
 	doSignup() {
 		// Attempt to login through our User service
-		this._user.signup(this.account)
+		Observable.fromPromise(this._user.signup(this.account))
+			.concatMap(result => MeteorObservable.call('sendVerificationLink'),
+					  (outer, inner) => outer)
 			.subscribe(
-				(resp) => {
-					console.log(resp);
-					this.navCtrl.push(Setup1);
-				},
-				(err) => {
-					this.navCtrl.push(Setup1); // TODO: Remove this when you add your signup endpoint
-
-					// Unable to sign up
-					const toast = this.toastCtrl.create({
-						message: err,
-						duration: 3000,
-						position: 'top'
-					});
-					toast.present();
-				}
+				() => {console.log('signup complete')},
+				(e: Error) => {console.log(e)}
 			);
 	}
 }
