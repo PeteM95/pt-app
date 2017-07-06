@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage({
 	name: 'verify-email',
@@ -12,10 +12,11 @@ import { IonicPage, NavController } from 'ionic-angular';
 export class VerifyEmailPage implements OnInit{
 	token: string;
 	
-	constructor(public navCtrl: NavController) {  }
+	constructor(public navCtrl: NavController,
+				public navParams: NavParams) {  }
 
 	ngOnInit() {
-		console.log(this.token);
+		console.log(this.navParams.get('token'));
 	}
 
 }

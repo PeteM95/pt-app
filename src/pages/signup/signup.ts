@@ -35,7 +35,7 @@ export class SignupPage {
 					  (outer, inner) => outer)
 			.subscribe(
 				() => {console.log('signup complete')},
-				(e: Error) => {console.log(e)}
+				(e: Error) => {this.navCtrl.push('verify-email', {'token': 'test'})}
 			);
 	}
 }

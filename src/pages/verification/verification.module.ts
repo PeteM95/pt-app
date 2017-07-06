@@ -4,13 +4,10 @@ import { IonicPageModule } from 'ionic-angular';
 
 @NgModule({
 	declarations: [
-		VerifyEmailPage
+		VerifyEmailPage,
 	],
 	imports: [
 		IonicPageModule.forChild(VerifyEmailPage)
-	],
-	entryComponents: [
-		VerifyEmailPage
 	]
 })
 export class VerificationModule {  }
