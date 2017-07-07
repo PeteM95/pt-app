@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ToastController } from 'ionic-angular';
+import { AlertController, NavController, ToastController } from 'ionic-angular';
 import { Observable } from 'rxjs';
 import { MeteorObservable } from 'meteor-rxjs';
 
@@ -25,8 +25,9 @@ export class SignupPage {
 	// private signupErrorString: string;
 
 	constructor(public navCtrl: NavController,
-				public _user: User,
-				public toastCtrl: ToastController) {  }
+				public toastCtrl: ToastController,
+				private alertCtrl: AlertController,
+				private _user: User) {  }
 
 	doSignup() {
 		// Attempt to login through our User service
@@ -34,8 +35,18 @@ export class SignupPage {
 			.concatMap(result => MeteorObservable.call('sendVerificationLink'),
 					  (outer, inner) => outer)
 			.subscribe(
-				() => {console.log('signup complete')},
-				(e: Error) => {this.navCtrl.push('verify-email', {'token': 'test'})}
+				() => console.log('signup complete'),
+				(e: Error) => this.handleError(e)
 			);
+	}
+
+	handleError(e: Error): void {
+		console.log(e);
+
+		const alert = this.alertCtrl.create({
+			buttons: ['OK'],
+			message: e.message,
+			title: 'Oops!'
+		});
 	}
 }

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AlertController, IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Observable } from 'rxjs';
+
+import { User } from '../../services/user';
 
 @IonicPage({
 	name: 'verify-email',
@@ -13,10 +16,27 @@ export class VerifyEmailPage implements OnInit{
 	token: string;
 	
 	constructor(public navCtrl: NavController,
-				public navParams: NavParams) {  }
+				public navParams: NavParams,
+				private alertCtrl: AlertController,
+				private _user: User) {  }
 
 	ngOnInit() {
-		console.log(this.navParams.get('token'));
+		this.token = this.navParams.get('token');
+		Observable.fromPromise(this._user.verifyEmail(this.token))
+			.subscribe(
+				() => console.log(this.token),
+				(e: Error) => this.handleError(e)
+			);
+	}
+
+	handleError(e: Error): void {
+		console.log(e);
+
+		const alert = this.alertCtrl.create({
+			buttons: ['OK'],
+			message: e.message,
+			title: 'Oops!'
+		});
 	}
 
 }

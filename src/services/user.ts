@@ -73,14 +73,13 @@ export class User {
 	 * Takes token from verification link and verifies user email,
 	 * then logs user in
 	 */
-	verifyEmail(token: string, done): Promise<void> {
+	verifyEmail(token: string): Promise<void> {
 		return new Promise<void>((resolve, reject) => {
 			Accounts.verifyEmail(token, (e: Error) => {
 				if (e) {
 					return reject(e);
 				}
-				
-				done();
+
 				resolve();
 			});
 		});

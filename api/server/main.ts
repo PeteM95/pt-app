@@ -9,14 +9,18 @@ Meteor.startup(() => {
 	Accounts.emailTemplates.siteName = "test";
 	Accounts.emailTemplates.from = "Test <dingleberry@dupe-squad.biz>";
 
+	Accounts.urls.verifyEmail = (token) => {
+		return `http://localhost:8100/#/nav/n4/verify-email/${token}`;
+	}
+
 	Accounts.emailTemplates.verifyEmail = {
 		subject: (user) => {
 			return `Hello ${user}, please verify your email`;
 		},
 		text: (user, url: string) => {
-			let splitUrl = url.split('#/');
-			let newUrl = `${splitUrl[0]}#/nav/n4/${splitUrl[1]}`;
-			return `Hello ${user}, please verify your email by clicking on the following link: \n${newUrl}`;
+			// let splitUrl = url.split('#/');
+			// let newUrl = `${splitUrl[0]}#/nav/n4/${splitUrl[1]}`;
+			return `Hello ${user}, please verify your email by clicking on the following link: \n${url}`;
 		}
 	};
 });
