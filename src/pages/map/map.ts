@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 import { NavController, Platform } from 'ionic-angular';
 import { Observable, Subscription } from 'rxjs';
 
@@ -13,7 +13,7 @@ declare var cordova: any;
 	selector: 'page-map',
 	templateUrl: 'map.html'
 })
-export class MapPage implements AfterViewInit, OnDestroy {
+export class MapPage implements OnDestroy {
 	coords: Subscription;
 	firstCamera: boolean;
 	googleMap: GoogleMap;
@@ -45,13 +45,6 @@ export class MapPage implements AfterViewInit, OnDestroy {
 		};
 	}
 
-	ngAfterViewInit() {
-		// this.platform.ready().then(() => {
-		// 	this.loadMap();
-		// 	this.watchPosition();
-		// });
-	}
-
 	ngOnDestroy() {
 		this.coords.unsubscribe();
 	}
@@ -65,17 +58,6 @@ export class MapPage implements AfterViewInit, OnDestroy {
 			marker.showInfoWindow();
 			this.marker = marker;
 		});
-
-
-		// Observable.fromPromise(this.googleMap.addMarker(this.markerOptions))
-		// 	.subscribe(
-		// 		(marker: Marker) => {
-		// 			marker.showInfoWindow();
-		// 			this.marker = marker;
-		// 		},
-		// 		(err: any) => console.log(err),
-		// 		() => {}
-		// 	);
 	}
 
 	checkIn(): void {
@@ -92,26 +74,7 @@ export class MapPage implements AfterViewInit, OnDestroy {
 		this.map.one(plugin.google.maps.event.MAP_READY, () => {
 			console.log('Map is ready.');
 		});
-
-
-
-
-
-
-
-		// // create a new map by passing HTMLElement
-		// let element: HTMLElement = document.getElementById('map');
-
-		// this.googleMap = this._googleMaps.create(element);
-
-		// // listen to MAP_READY event
-		// // must wait for this event to fire before modifying the map
-		// Observable.fromPromise(this.googleMap.one(GoogleMapsEvent.MAP_READY))
-		// 	.subscribe(
-		// 		() => console.log('Map page Map is ready'),
-		// 		(err: any) => console.log(err),
-		// 		() => {}
-		// 	);
+		
 		this.firstCamera = true;
 	}
 

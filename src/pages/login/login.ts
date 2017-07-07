@@ -1,20 +1,21 @@
 import { Component } from '@angular/core';
-import { NavController, ToastController } from 'ionic-angular';
+import { AlertController, NavController, ToastController } from 'ionic-angular';
+import { Observable } from 'rxjs';
 
 import { MainPage } from '../../pages/pages';
 
 import { User } from '../../services/user';
+
+import { Profile } from 'api/models';
 
 @Component({
 	selector: 'page-login',
 	templateUrl: 'login.html'
 })
 export class LoginPage {
-	// The account fields for the login form.
-	// If you're using the username field with or without email, make
-	// sure to add it to the type
-	account: { username: string, password: string } = {
+	account: Profile = {
 		username: 'Test Human',
+		email: 'pete.milionis@gmail.com',
 		password: 'test'
 	};
 
@@ -22,11 +23,26 @@ export class LoginPage {
 	//private loginErrorString: string;
 
 	constructor(public navCtrl: NavController,
-				public _user: User,
-				public toastCtrl: ToastController) {  }
+				public toastCtrl: ToastController,
+				private alertCtrl: AlertController,
+				private _user: User) {  }
 
 	// Attempt to login through our User service
 	doLogin() {
-		console.log('log in');
+		Observable.fromPromise(this._user.login(this.account))
+			.subscribe(
+				() => this.navCtrl.push(MainPage),
+				(e: Error) => this.handleError(e)
+			);
+	}
+
+	handleError(e: Error): void {
+		console.log(e);
+
+		const alert = this.alertCtrl.create({
+			buttons: ['OK'],
+			message: e.message,
+			title: 'Oops!'
+		});
 	}
 }
