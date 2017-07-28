@@ -2,9 +2,10 @@ import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { ModalController, NavController, Platform } from 'ionic-angular';
 import { MapsAPILoader } from '@agm/core';
 import { Observable } from 'rxjs';
+import { MeteorObservable } from 'meteor-rxjs';
 
 import { AutocompletePage } from './autocomplete';
-import { Setup4 } from '../pages';
+import { Setup2 } from '../pages';
 
 import { CameraPosition, Geocoder, GeocoderResult, GoogleMap, GoogleMaps, GoogleMapsEvent, LatLng, Marker, MarkerIcon, MarkerOptions } from '@ionic-native/google-maps';
 
@@ -113,9 +114,9 @@ export class GymSetup implements AfterViewInit {
 	}
 
 	pushPage(): void {
-		// TODO: Process data
+		MeteorObservable.call('updateGymLocation', this.gym.name, this.gym.position).subscribe((changes: number) => console.log(changes));
 		this.map.remove();
-		Observable.fromPromise(this.navCtrl.push(Setup4))
+		Observable.fromPromise(this.navCtrl.push(Setup2))
 			.subscribe(
 				() => console.log('Pushing to next'),
 				(err: any) => console.log(err),

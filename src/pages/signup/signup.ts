@@ -35,7 +35,7 @@ export class SignupPage {
 			.concatMap(result => MeteorObservable.call('sendVerificationLink'),
 					  (outer, inner) => outer)
 			.subscribe(
-				() => console.log('signup complete'),
+				() => this.navCtrl.setRoot(Setup1),
 				(e: Error) => this.handleError(e)
 			);
 	}

@@ -13,5 +13,3 @@ export const MainPage = TabsPage;
 
 // The initial root pages for our tabs (remove if not using tabs)
 export const Tab1Root = MapPage;
-export const Tab2Root = AboutPage;
-export const Tab3Root = ContactPage;

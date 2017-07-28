@@ -1,1 +1,10 @@
 Install NPM package: moment to use for date/time functions?
+
+
+___Reminders___:
+-Implement Ionic Deeplinking to open verification links in app http://blog.ionic.io/deeplinking-in-ionic-apps/
+
+
+___Log___:
+Login and Signup pages are working.
+Next thing to do is implement Setup pages api communication

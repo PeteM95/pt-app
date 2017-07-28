@@ -1,89 +1,89 @@
 {
-  "name": "pt-app",
-  "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "http://ionicframework.com/",
-  "private": true,
-  "scripts": {
-    "api": "cd api && meteor run --settings private/settings.json",
-    "clean": "ionic-app-scripts clean",
-    "build": "ionic-app-scripts build",
-    "lint": "ionic-app-scripts lint",
-    "ionic:build": "ionic-app-scripts build",
-    "ionic:serve": "ionic-app-scripts serve",
-    "meteor-client:bundle": "meteor-client bundle -s api"
-  },
-  "dependencies": {
-    "@agm/core": "^1.0.0-beta.0",
-    "@angular/common": "4.1.3",
-    "@angular/compiler": "4.1.3",
-    "@angular/compiler-cli": "4.1.3",
-    "@angular/core": "4.1.3",
-    "@angular/forms": "4.1.3",
-    "@angular/http": "4.1.3",
-    "@angular/platform-browser": "4.1.3",
-    "@angular/platform-browser-dynamic": "4.1.3",
-    "@ionic-native/core": "3.10.2",
-    "@ionic-native/geolocation": "^3.10.3",
-    "@ionic-native/google-maps": "^3.10.2",
-    "@ionic-native/splash-screen": "3.10.2",
-    "@ionic-native/status-bar": "3.10.2",
-    "@ionic/storage": "2.0.1",
-    "@types/underscore": "^1.8.1",
-    "babel-runtime": "^6.23.0",
-    "bcrypt": "^1.0.2",
-    "cordova-android": "^6.2.3",
-    "cordova-plugin-compat": "^1.1.0",
-    "cordova-plugin-console": "^1.0.5",
-    "cordova-plugin-device": "^1.1.4",
-    "cordova-plugin-geolocation": "^2.4.3",
-    "cordova-plugin-googlemaps": "git+https://github.com/mapsplugin/cordova-plugin-googlemaps.git#multiple_maps",
-    "cordova-plugin-googlemaps-sdk": "git+https://github.com/mapsplugin/cordova-plugin-googlemaps-sdk.git",
-    "cordova-plugin-splashscreen": "^4.0.3",
-    "cordova-plugin-statusbar": "^2.2.2",
-    "cordova-plugin-whitelist": "^1.3.1",
-    "ionic-angular": "^3.5.0",
-    "ionic-plugin-keyboard": "^2.2.1",
-    "ionicons": "3.0.0",
-    "meteor-node-stubs": "^0.2.11",
-    "meteor-rxjs": "^0.4.7",
-    "rxjs": "5.4.0",
-    "sw-toolbox": "3.6.0",
-    "zone.js": "0.8.12"
-  },
-  "devDependencies": {
-    "@ionic/app-scripts": "1.3.7",
-    "@ionic/cli-plugin-cordova": "1.4.0",
-    "@ionic/cli-plugin-ionic-angular": "1.3.1",
-    "@types/google-maps": "^3.2.0",
-    "@types/googlemaps": "^3.26.13",
-    "@types/meteor": "^1.4.2",
-    "@types/underscore": "^1.8.1",
-    "meteor-typings": "^1.3.1",
-    "tmp": "0.0.31",
-    "typescript": "2.3.3",
-    "typescript-extends": "^1.0.1"
-  },
-  "description": "An Ionic project",
-  "cordova": {
-    "plugins": {
-      "cordova-plugin-geolocation": {},
-      "cordova-plugin-console": {},
-      "cordova-plugin-device": {},
-      "cordova-plugin-splashscreen": {},
-      "cordova-plugin-statusbar": {},
-      "cordova-plugin-whitelist": {},
-      "ionic-plugin-keyboard": {},
-      "cordova-plugin-googlemaps": {
-        "API_KEY_FOR_ANDROID": "AIzaSyD4E1g6MYlG73NQsdoJb4QW1Qzt3Cae2hI",
-        "API_KEY_FOR_IOS": "AIzaSyD4E1g6MYlG73NQsdoJb4QW1Qzt3Cae2hI"
-      }
+    "name": "pt-app",
+    "version": "0.0.1",
+    "author": "Ionic Framework",
+    "homepage": "http://ionicframework.com/",
+    "private": true,
+    "scripts": {
+        "api": "cd api && meteor run --settings private/settings.json",
+        "clean": "ionic-app-scripts clean",
+        "build": "ionic-app-scripts build",
+        "lint": "ionic-app-scripts lint",
+        "ionic:build": "ionic-app-scripts build",
+        "ionic:serve": "ionic-app-scripts serve",
+        "meteor-client:bundle": "meteor-client bundle -s api -c meteor-client.config.json"
     },
-    "platforms": [
-      "android"
-    ]
-  },
-  "config": {
-    "ionic_webpack": "./webpack.config.js"
-  }
+    "dependencies": {
+        "@agm/core": "^1.0.0-beta.0",
+        "@angular/common": "4.1.3",
+        "@angular/compiler": "4.1.3",
+        "@angular/compiler-cli": "4.1.3",
+        "@angular/core": "4.1.3",
+        "@angular/forms": "4.1.3",
+        "@angular/http": "4.1.3",
+        "@angular/platform-browser": "4.1.3",
+        "@angular/platform-browser-dynamic": "4.1.3",
+        "@ionic-native/core": "3.10.2",
+        "@ionic-native/geolocation": "^3.10.3",
+        "@ionic-native/google-maps": "^3.10.2",
+        "@ionic-native/splash-screen": "3.10.2",
+        "@ionic-native/status-bar": "3.10.2",
+        "@ionic/storage": "2.0.1",
+        "babel-runtime": "^6.23.0",
+        "bcrypt": "^1.0.2",
+        "cordova-android": "^6.2.3",
+        "cordova-plugin-compat": "^1.1.0",
+        "cordova-plugin-console": "^1.0.7",
+        "cordova-plugin-device": "^1.1.6",
+        "cordova-plugin-geolocation": "^2.4.3",
+        "cordova-plugin-googlemaps": "git+https://github.com/mapsplugin/cordova-plugin-googlemaps.git#multiple_maps",
+        "cordova-plugin-googlemaps-sdk": "git+https://github.com/mapsplugin/cordova-plugin-googlemaps-sdk.git",
+        "cordova-plugin-splashscreen": "^4.0.3",
+        "cordova-plugin-statusbar": "^2.2.3",
+        "cordova-plugin-whitelist": "^1.3.2",
+        "ionic-angular": "^3.5.0",
+        "ionic-plugin-keyboard": "^2.2.1",
+        "ionicons": "3.0.0",
+        "meteor-client": "^1.3.1",
+        "meteor-node-stubs": "^0.2.11",
+        "meteor-rxjs": "^0.4.7",
+        "rxjs": "5.4.0",
+        "sw-toolbox": "3.6.0",
+        "zone.js": "0.8.12"
+    },
+    "devDependencies": {
+        "@ionic/app-scripts": "1.3.7",
+        "@ionic/cli-plugin-cordova": "1.4.1",
+        "@ionic/cli-plugin-ionic-angular": "1.3.2",
+        "@types/google-maps": "^3.2.0",
+        "@types/googlemaps": "^3.26.13",
+        "@types/meteor": "^1.4.2",
+        "@types/underscore": "^1.8.1",
+        "meteor-typings": "^1.3.1",
+        "tmp": "0.0.31",
+        "typescript": "2.3.3",
+        "typescript-extends": "^1.0.1"
+    },
+    "description": "An Ionic project",
+    "cordova": {
+        "plugins": {
+            "cordova-plugin-geolocation": {},
+            "cordova-plugin-console": {},
+            "cordova-plugin-device": {},
+            "cordova-plugin-splashscreen": {},
+            "cordova-plugin-statusbar": {},
+            "cordova-plugin-whitelist": {},
+            "ionic-plugin-keyboard": {},
+            "cordova-plugin-googlemaps": {
+                "API_KEY_FOR_ANDROID": "AIzaSyD4E1g6MYlG73NQsdoJb4QW1Qzt3Cae2hI",
+                "API_KEY_FOR_IOS": "AIzaSyD4E1g6MYlG73NQsdoJb4QW1Qzt3Cae2hI"
+            }
+        },
+        "platforms": [
+            "android"
+        ]
+    },
+    "config": {
+        "ionic_webpack": "./webpack.config.js"
+    }
 }

@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { AlertController, NavController, ToastController } from 'ionic-angular';
 import { Observable } from 'rxjs';
 
-import { MainPage } from '../../pages/pages';
+//import { MainPage } from '../../pages/pages';
+import { Setup1 } from '../setup/pages';
 
 import { User } from '../../services/user';
 
@@ -31,7 +32,7 @@ export class LoginPage {
 	doLogin() {
 		Observable.fromPromise(this._user.login(this.account))
 			.subscribe(
-				() => this.navCtrl.push(MainPage),
+				() => this.navCtrl.push(Setup1),
 				(e: Error) => this.handleError(e)
 			);
 	}

@@ -4,6 +4,11 @@ import { Accounts } from 'meteor/accounts-base';
 declare var process: any;
 
 Meteor.startup(() => {
+	// Deny all client-side updates to user documents
+	Meteor.users.deny({
+		update() {return true;}
+	});
+
 	process.env.MAIL_URL = Meteor.settings.private.MAIL_URL;
 
 	Accounts.emailTemplates.siteName = "test";

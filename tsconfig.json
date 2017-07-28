@@ -23,7 +23,8 @@
     "noImplicitAny": false,
     "types": [
       "@types/underscore",
-      "@types/googlemaps"
+      "@types/googlemaps",
+      "@types/meteor"
     ]
   },
   "include": [
