@@ -10,3 +10,5 @@ Login and Signup pages are working.
 Next thing to do is implement Setup pages api communication
 Connectio from mobile client to server was causing package issues, resolved by changing meteor-bundle command (https://blog.meteor.com/leverage-the-power-of-meteor-with-any-client-side-framework-bfb909141008)
 Signup and Login are now unresponsive
+DDP issue fixed (needed to set ROOT_URL)
+Now to clean up testing code (for DDP) and on to setup api

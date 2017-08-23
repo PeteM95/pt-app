@@ -1,7 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AlertController, NavController, ToastController } from 'ionic-angular';
 import { Observable } from 'rxjs';
 import { MeteorObservable } from 'meteor-rxjs';
+
+import { Meteor } from 'meteor/meteor';
+import { DDP } from 'meteor/ddp';
 
 import { Setup1 } from '../setup/pages';
 import { User } from '../../services/user';
@@ -11,7 +14,7 @@ import { Profile } from 'api/models';
 	selector: 'page-signup',
 	templateUrl: 'signup.html'
 })
-export class SignupPage {
+export class SignupPage implements OnInit {
 	// The account fields for the login form.
 	// If you're using th eusername field with or without email, make
 	// sure to add it to the type
@@ -21,6 +24,9 @@ export class SignupPage {
 		password: 'test'
 	};
 
+	// FOR TESTING
+	ddp: any;
+
 	// Our translated text strings
 	// private signupErrorString: string;
 
@@ -29,8 +35,26 @@ export class SignupPage {
 				private alertCtrl: AlertController,
 				private _user: User) {  }
 
+	ngOnInit() {
+		// console.log('testing');
+		// this.ddp = DDP.connect('http://192.168.0.20:3000');
+		// this.ddp.call('testConnection');
+		// MeteorObservable.call('testConnection').subscribe();
+
+		// Log DDP
+		let oldSend = Meteor['connection']._stream.send;
+		Meteor['connection']._stream.send = function() {
+			oldSend.apply(this, arguments);
+		}
+
+		Meteor['connection']._stream.on('message', (message) => {
+			console.log('DDP receive: ', message);
+		});
+	}
+
 	doSignup() {
 		// Attempt to login through our User service
+		this.testConnection();
 		Observable.fromPromise(this._user.signup(this.account))
 			.concatMap(result => MeteorObservable.call('sendVerificationLink'),
 					  (outer, inner) => outer)
@@ -38,6 +62,12 @@ export class SignupPage {
 				() => this.navCtrl.setRoot(Setup1),
 				(e: Error) => this.handleError(e)
 			);
+	}
+
+	testConnection() {
+		console.log(Meteor.status());
+		// console.log(this.ddp.status());
+		// DDP.connect('http://192.168..20:3000').call('testConnection');
 	}
 
 	handleError(e: Error): void {

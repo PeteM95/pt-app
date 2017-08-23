@@ -58,8 +58,10 @@ export class User {
 	 * Creates user and, upon success, logs in
 	 */
 	signup(user: Profile): Promise<void> {
+		console.log('signup(user: Profile)');
 		return new Promise<void>((resolve, reject) => {
 			Accounts.createUser(user, (e: Error) => {
+				console.log('Accounts.createUser(user, ...)');
 				if (e) {
 					return reject(e);
 				}

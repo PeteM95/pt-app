@@ -4,6 +4,11 @@ import { Accounts } from 'meteor/accounts-base';
 declare var process: any;
 
 Meteor.startup(() => {
+	Accounts.onCreateUser((options, user) => {
+		console.log('onCreateUser');
+
+		return user;
+	});
 	// Deny all client-side updates to user documents
 	Meteor.users.deny({
 		update() {return true;}

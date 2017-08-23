@@ -39,5 +39,9 @@ Meteor.methods({
 			"gymName": gymName,
 			"gymLocation": gymPosition
 		}});
+	},
+
+	testConnection(): void {
+		console.log('connected...');
 	}
 });
